@@ -38,10 +38,11 @@ class CoffeeShop  extends ChangeNotifier {
   List<Coffee> get userCart => _userCart;
 
   // add item to cart
-  void addItemToCart(Coffee coffee) {
+  void addItemToCart(Coffee coffee, int quantity) {
     _userCart.add(coffee);
     notifyListeners();
   }
+
 
   // remove item from cart
   void removeItemFromCart(Coffee coffee) {

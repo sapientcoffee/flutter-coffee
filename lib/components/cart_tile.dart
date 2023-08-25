@@ -3,17 +3,18 @@ import '../models/coffee.dart';
 
 /*
 
-COFFEE TILE
+CART TILE
 
-This is the tile seen on the shop page.
-User can add to cart by tapping the tile.
+This is the tile seen on the coffee order page.
+User can remove from cart by tapping the tile.
+
 
 */
 
-class CoffeeTile extends StatelessWidget {
+class CartTile extends StatelessWidget {
   final Coffee coffee;
   void Function()? onPressed;
-  CoffeeTile({
+  CartTile({
     super.key,
     required this.coffee,
     required this.onPressed,
@@ -27,7 +28,7 @@ class CoffeeTile extends StatelessWidget {
         borderRadius: BorderRadius.circular(12),
       ),
       margin: const EdgeInsets.only(left: 25, right: 25, bottom: 10),
-      padding: const EdgeInsets.symmetric(vertical: 25, horizontal: 10),
+      padding: const EdgeInsets.symmetric(vertical: 10, horizontal: 10),
       child: ListTile(
         leading: Image.asset(coffee.imagePath),
         title: Padding(
@@ -40,7 +41,7 @@ class CoffeeTile extends StatelessWidget {
         subtitle: Text('\$${coffee.price}'),
         trailing: IconButton(
           icon: Icon(
-            Icons.arrow_forward,
+            Icons.delete,
             color: Colors.brown[300],
           ),
           onPressed: onPressed,

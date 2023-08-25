@@ -1,9 +1,18 @@
 import 'package:flutter/material.dart';
-import 'package:myapp/components/coffee_tile.dart';
 import 'package:provider/provider.dart';
-
+import '../components/cart_tile.dart';
+import '../components/my_button.dart';
 import '../models/coffee.dart';
 import '../models/coffee_shop.dart';
+
+/*
+
+CART PAGE
+
+  - User can check their cart and remove items if necessary
+  - User can tap 'Pay now' button $
+
+*/
 
 class CartPage extends StatefulWidget {
   const CartPage({super.key});
@@ -13,81 +22,61 @@ class CartPage extends StatefulWidget {
 }
 
 class _CartPageState extends State<CartPage> {
+  // delete item from cart
+  void removeItemFromCart(Coffee coffee) {
+    Provider.of<CoffeeShop>(context, listen: false).removeItemFromCart(coffee);
+  }
 
-    // remove item from cart
-    void removeFromCart(Coffee coffee) {
-      Provider.of<CoffeeShop>(context, listen: false).removeItemFromCart(coffee);
-    }
+  // pay now button tapped
+  void payNow() {
+    /*
 
-    // pay button tapped
-    void payNow() {
-      /*
-        LOGIC TO MAKE PAYMENTS WITH PROCESSOR
-      */
+    integrate your payment services in this method
 
-
-    }
-
+    */
+  }
 
   @override
   Widget build(BuildContext context) {
     return Consumer<CoffeeShop>(
-      builder: (context, value, child) => SafeArea(
-      child: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: Column(
-          children: [
-            
-            // heading
-            Text(
-              "Your Cart",
-              style: TextStyle(fontSize: 20),
+      builder: (context, value, child) => Column(
+        children: [
+          // heading
+          Row(
+            children: const [
+              Padding(
+                padding: EdgeInsets.only(left: 25.0, top: 25, bottom: 25),
+                child: Text(
+                  'Your Cart',
+                  style: TextStyle(
+                    fontSize: 20,
+                  ),
+                ),
               ),
+            ],
+          ),
 
-            // list of cart items
-            Expanded(child: ListView.builder(
+          // list of cart items
+          Expanded(
+            child: ListView.builder(
               itemCount: value.userCart.length,
-              itemBuilder: (contect, index) {
-              // get individual cart itmes
-              Coffee eachCoffee = value.userCart[index];
+              itemBuilder: (context, index) {
+                // get individual cart items
+                Coffee coffee = value.userCart[index];
 
-              // return coffee tile
-              return CoffeeTile(
-                coffee: eachCoffee, 
-                onPressed: () => removeFromCart(eachCoffee), 
-                icon: Icon(Icons.delete),
+                // return as a list tile
+                return CartTile(
+                  coffee: coffee,
+                  onPressed: () => removeItemFromCart(coffee),
                 );
-            }),
+              },
+            ),
           ),
 
           // pay button
-          GestureDetector(
-            onTap: payNow,
-            child: Container(
-              padding: const EdgeInsets.all(25),
-              width: double.infinity,
-              decoration: BoxDecoration(
-                color: Colors.brown, 
-                borderRadius: BorderRadius.circular(12),
-              ),
-              child: const Center(
-                child: Text(
-                  "Pay Now", 
-                  style: TextStyle(color: Colors.white),
-                ),
-              ),
-            ),
-          )
-           
-           
-           
-           
-           
-           
+          MyButton(text: "Pay now", onTap: payNow)
         ],
       ),
-    ),
-  ),
-);
-}
+    );
+  }
 }

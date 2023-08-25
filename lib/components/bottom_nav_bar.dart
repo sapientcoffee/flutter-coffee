@@ -1,6 +1,17 @@
 import 'package:flutter/material.dart';
 import 'package:google_nav_bar/google_nav_bar.dart';
 
+/*
+
+GOOGLE BOTTOM NAV BAR
+
+This nav bar at the bottom looks modern, currently there are 2 tabs:
+  - shop
+  - cart
+
+*/
+
+
 class MyBottomNavBar extends StatelessWidget {
   void Function(int)? onTabChange;
   MyBottomNavBar({super.key, required this.onTabChange});
