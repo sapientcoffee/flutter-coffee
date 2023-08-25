@@ -23,17 +23,17 @@ class _HomePageState extends State<HomePage> {
   // pages
   final List<Widget> _pages = [
     // shop page
-    const ShopPage(),
+    ShopPage(),
 
     // cart page
-    const CartPage(),
+    CartPage(),
   ];
   
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       backgroundColor: backgroundColor,
-      bottomNavigationBar: const MyBottomNavBar(
+      bottomNavigationBar: MyBottomNavBar(
         onTabChange: (index) => navigateBottomBar(index),
       ),
       body: _pages[_selectedIndex]
